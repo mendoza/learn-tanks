@@ -15,8 +15,8 @@ public:
   void draw();
 
 private:
-  gameDataRef _data;
-  sf::Sprite _background;
+  gameDataRef data;
+  sf::Sprite background;
   sol::state script;
   Entity redTank;
   EntityManager tanks;

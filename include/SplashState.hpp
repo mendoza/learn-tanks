@@ -15,9 +15,9 @@ public:
   void draw();
 
 private:
-  gameDataRef _data;
-  sf::Clock _clock;
-  sf::Sprite _background;
+  gameDataRef data;
+  sf::Clock clock;
+  sf::Sprite background;
   sol::state script;
   sol::table meta;
   sol::table splash;

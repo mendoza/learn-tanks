@@ -18,9 +18,9 @@ public:
 
 private:
   std::stack<StateRef> _states;
-  StateRef _newState;
-  bool _isRemoving;
-  bool _isAdding;
-  bool _isReplacing;
+  StateRef newState;
+  bool isRemoving;
+  bool isAdding;
+  bool isReplacing;
 };
 } // namespace Skeleton

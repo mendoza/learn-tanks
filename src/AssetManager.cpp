@@ -4,34 +4,34 @@ namespace Skeleton {
 void AssetManager::loadTexture(std::string name, std::string filename) {
   sf::Texture tex;
   if (tex.loadFromFile(filename)) {
-    this->_textures[name] = tex;
+    this->textures[name] = tex;
   }
 }
 
 sf::Texture &AssetManager::getTexture(std::string name) {
-  return this->_textures.at(name);
+  return this->textures.at(name);
 }
 
 void AssetManager::loadFont(std::string name, std::string filename) {
   sf::Font font;
   if (font.loadFromFile(filename)) {
-    this->_fonts[name] = font;
+    this->fonts[name] = font;
   }
 }
 
 sf::Font &AssetManager::getFont(std::string name) {
-  return this->_fonts.at(name);
+  return this->fonts.at(name);
 }
 
 void AssetManager::loadSound(std::string name, std::string filename) {
   sf::SoundBuffer soundbuffer;
   if (soundbuffer.loadFromFile(filename)) {
-    this->_soundBuffers[name] = soundbuffer;
+    this->soundBuffers[name] = soundbuffer;
   }
 }
 
 sf::SoundBuffer &AssetManager::getSound(std::string name) {
-  return this->_soundBuffers.at(name);
+  return this->soundBuffers.at(name);
 }
 
 } // namespace Skeleton

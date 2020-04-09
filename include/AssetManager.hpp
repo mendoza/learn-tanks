@@ -20,9 +20,9 @@ public:
   sf::SoundBuffer &getSound(std::string name);
 
 private:
-  std::map<std::string, sf::Texture> _textures;
-  std::map<std::string, sf::Font> _fonts;
-  std::map<std::string, sf::SoundBuffer> _soundBuffers;
+  std::map<std::string, sf::Texture> textures;
+  std::map<std::string, sf::Font> fonts;
+  std::map<std::string, sf::SoundBuffer> soundBuffers;
 };
 
 }; // namespace Skeleton
