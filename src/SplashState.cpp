@@ -1,3 +1,4 @@
+#include <GameState.hpp>
 #include <SplashState.hpp>
 #include <iostream>
 
@@ -27,6 +28,7 @@ void SplashState::handleInput() {
 void SplashState::update(float dt) {
   float time = this->splash["time"];
   if (this->_clock.getElapsedTime().asSeconds() > time) {
+    this->_data->machine.addState(StateRef(new GameState(this->_data)));
   }
 }
 
