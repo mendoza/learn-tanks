@@ -7,7 +7,7 @@ INCLUDE	:= include
 LIB		:= lib
 
 LIBRARIES	:= -lsfml-graphics -lsfml-audio -lsfml-window -lsfml-system -llua53 -ldl
-EXECUTABLE	:= main
+EXECUTABLE	:= main.out
 
 
 all: $(BIN)/$(EXECUTABLE)
