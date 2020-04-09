@@ -2,7 +2,9 @@
     "files.associations": {
         "*.tpp": "cpp",
         "string": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "fstream": "cpp",
+        "iostream": "cpp"
     },
     "terminal.integrated.shell.windows": "cmd.exe",
 }
