@@ -1,5 +1,5 @@
 MetaData = {
-    title = "Skeleton Engine",
+    title = "Learn Tanks",
     width = 800,
     height = 600,
     fpsLimit = 60,
