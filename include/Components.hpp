@@ -28,6 +28,8 @@ public:
     data->assets.loadTexture(this->name, gc["spriteFilepath"]);
     sf::Texture &text = data->assets.getTexture(this->name);
     sf::Vector2f scale(gc["scale"]["width"], gc["scale"]["height"]);
+    sf::Vector2f origin(gc["origin"]["x"], gc["origin"]["y"]);
+    this->sprite.setOrigin(origin);
     this->sprite.setTexture(text);
     this->sprite.setScale(scale);
   }
