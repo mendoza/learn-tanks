@@ -1,5 +1,6 @@
 #pragma once
-#include <Game.hpp>
+#include <Engine.hpp>
+#include <GUI.hpp>
 #include <SFML/Graphics.hpp>
 #include <State.hpp>
 #include <sol.hpp>
@@ -9,6 +10,7 @@ class MenuState : public State {
 
 public:
   MenuState(gameDataRef data);
+  ~MenuState();
   void init();
   void handleInput();
   void update(float dt);
@@ -16,8 +18,7 @@ public:
 
 private:
   gameDataRef data;
+  std::map<std::string, GUI::Button *> buttons;
   sf::Sprite background;
-  sf::Sprite startButton;
-  sf::RectangleShape rectangle;
 };
 } // namespace Skeleton
