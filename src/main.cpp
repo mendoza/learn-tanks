@@ -1,18 +1,17 @@
 #include <Engine.hpp>
 #include <sol.hpp>
-#include <string>
 #include <vector>
 
 int main() {
-  sol::state script;
-  script.script_file("scripts/MetaData.lua");
-  sol::table meta = script["MetaData"];
-  std::string title = meta["title"];
-  std::string icon = meta["icon"];
-  int width = meta["width"];
-  int height = meta["height"];
-  int limit = meta["fpsLimit"];
-  bool vSync = meta["vSync"];
-  Skeleton::Engine(width, height, title, icon, limit, vSync);
-  return 0;
+	sol::state Script;
+	Script.script_file("scripts/MetaData.lua");
+	sol::table Meta = Script["MetaData"];
+	std::string Title = Meta["title"];
+	std::string Icon = Meta["icon"];
+	int Width = Meta["width"];
+	int Height = Meta["height"];
+	int Limit = Meta["fpsLimit"];
+	bool VSync = Meta["vSync"];
+	Skeleton::Engine(Width, Height, Title, Icon, Limit, VSync);
+	return 0;
 }

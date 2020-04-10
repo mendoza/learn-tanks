@@ -5,17 +5,16 @@
 #include <sol.hpp>
 
 class MenuState : public Skeleton::State {
+  public:
+	MenuState(Skeleton::GameDataRef Data);
+	~MenuState();
+	void init();
+	void handleInput();
+	void update(float dt);
+	void draw();
 
-public:
-  MenuState(Skeleton::gameDataRef data);
-  ~MenuState();
-  void init();
-  void handleInput();
-  void update(float dt);
-  void draw();
-
-private:
-  Skeleton::gameDataRef data;
-  std::map<std::string, Skeleton::GUI::Button *> buttons;
-  sf::Sprite background;
+  private:
+	Skeleton::GameDataRef Data;
+	std::map<std::string, Skeleton::GUI::Button *> Buttons;
+	sf::Sprite Background;
 };

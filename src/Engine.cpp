@@ -2,34 +2,34 @@
 #include <SplashState.hpp>
 
 namespace Skeleton {
-Engine::Engine(int width, int height, std::string title, std::string iconFile,
-               int limit, bool vSync) {
-  sf::Image image;
-  image.loadFromFile(iconFile);
-  this->data->window.create(sf::VideoMode(width, height), title,
-                            sf::Style::Titlebar | sf::Style::Close);
-  this->data->window.setVerticalSyncEnabled(vSync);
-  this->data->window.setIcon(image.getSize().x, image.getSize().y,
-                             image.getPixelsPtr());
-  this->data->window.setFramerateLimit(limit);
-  this->data->machine.addState(StateRef(new SplashState(this->data)));
-  this->run();
+Engine::Engine(int Width, int Height, std::string Title, std::string IconFile,
+			   int Limit, bool VSync) {
+	sf::Image image;
+	image.loadFromFile(IconFile);
+	this->Data->Window.create(sf::VideoMode(Width, Height), Title,
+							  sf::Style::Titlebar | sf::Style::Close);
+	this->Data->Window.setVerticalSyncEnabled(VSync);
+	this->Data->Window.setIcon(image.getSize().x, image.getSize().y,
+							   image.getPixelsPtr());
+	this->Data->Window.setFramerateLimit(Limit);
+	this->Data->Machine.addState(StateRef(new SplashState(this->Data)));
+	this->run();
 }
 
 void Engine::run() {
-  float frametime;
-  float accumulator = 0.0f;
-  while (this->data->window.isOpen()) {
-    this->data->machine.processStateChanges();
+	float frametime;
+	float accumulator = 0.0f;
+	while (this->Data->Window.isOpen()) {
+		this->Data->Machine.processStateChanges();
 
-    while (accumulator > dt) {
-      accumulator -= dt;
-      this->data->machine.getActiveState()->handleInput();
-      this->data->machine.getActiveState()->update(dt);
-    }
-    frametime = this->_clock.restart().asSeconds();
-    accumulator += frametime;
-    this->data->machine.getActiveState()->draw();
-  }
+		while (accumulator > dt) {
+			accumulator -= dt;
+			this->Data->Machine.getActiveState()->handleInput();
+			this->Data->Machine.getActiveState()->update(dt);
+		}
+		frametime = this->Clock.restart().asSeconds();
+		accumulator += frametime;
+		this->Data->Machine.getActiveState()->draw();
+	}
 }
 }; // namespace Skeleton

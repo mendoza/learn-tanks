@@ -4,48 +4,48 @@
 #include <sol.hpp>
 
 class Component {
-public:
-  virtual void update(float dt){};
-  virtual void draw(){};
-  virtual ~Component(){};
+  public:
+	virtual void update(float dt){};
+	virtual void draw(){};
+	virtual ~Component(){};
 };
 
 class GraphicComponent : public Component {
-public:
-  sf::Sprite sprite;
-  sf::Vector2u imageCount;
-  sf::Vector2u currentImage;
-  std::string name;
-  sf::IntRect uvRect;
-  float switchTime;
-  float totalTime = 0.0f;
-  bool animated = false;
-  int row = 0;
+  public:
+	sf::Sprite Sprite;
+	sf::Vector2u ImageCount;
+	sf::Vector2u CurrentImage;
+	std::string Name;
+	sf::IntRect UvRect;
+	float SwitchTime;
+	float TotalTime = 0.0f;
+	bool Animated = false;
+	int Row = 0;
 
-  GraphicComponent(Skeleton::gameDataRef data, sol::table gc) {
-    this->name = gc["spriteName"];
-    data->assets.loadTexture(this->name, gc["spriteFilepath"]);
-    sf::Texture &text = data->assets.getTexture(this->name);
-    sf::Vector2f scale(gc["scale"]["width"], gc["scale"]["height"]);
-    sf::Vector2f origin(gc["origin"]["x"], gc["origin"]["y"]);
-    this->sprite.setOrigin(origin);
-    this->sprite.setTexture(text);
-    this->sprite.setScale(scale);
-  }
+	GraphicComponent(Skeleton::GameDataRef Data, sol::table GC) {
+		this->Name = GC["spriteName"];
+		Data->Assets.loadTexture(this->Name, GC["spriteFilepath"]);
+		sf::Texture &text = Data->Assets.getTexture(this->Name);
+		sf::Vector2f scale(GC["scale"]["width"], GC["scale"]["height"]);
+		sf::Vector2f origin(GC["origin"]["x"], GC["origin"]["y"]);
+		this->Sprite.setOrigin(origin);
+		this->Sprite.setTexture(text);
+		this->Sprite.setScale(scale);
+	}
 
-  void update(float dt) override {
-    if (this->animated) {
-      this->totalTime += dt;
-      if (totalTime >= switchTime) {
-        totalTime -= switchTime;
-        currentImage.x++;
-        if (currentImage.x >= imageCount.x) {
-          currentImage.x = 0;
-        }
-      }
-      uvRect.left = currentImage.x * uvRect.width;
-      uvRect.top = currentImage.y * uvRect.height;
-      this->sprite.setTextureRect(this->uvRect);
-    }
-  }
+	void update(float dt) override {
+		if (this->Animated) {
+			this->TotalTime += dt;
+			if (TotalTime >= SwitchTime) {
+				TotalTime -= SwitchTime;
+				CurrentImage.x++;
+				if (CurrentImage.x >= ImageCount.x) {
+					CurrentImage.x = 0;
+				}
+			}
+			UvRect.left = CurrentImage.x * UvRect.width;
+			UvRect.top = CurrentImage.y * UvRect.height;
+			this->Sprite.setTextureRect(this->UvRect);
+		}
+	}
 };

@@ -5,18 +5,18 @@
 
 class SplashState : public Skeleton::State {
 
-public:
-  SplashState(Skeleton::gameDataRef data);
-  void init();
-  void handleInput();
-  void update(float dt);
-  void draw();
+  public:
+	SplashState(Skeleton::GameDataRef data);
+	void init();
+	void handleInput();
+	void update(float dt);
+	void draw();
 
-private:
-  Skeleton::gameDataRef data;
-  sf::Clock clock;
-  sf::Sprite background;
-  sol::state script;
-  sol::table meta;
-  sol::table splash;
+  private:
+	Skeleton::GameDataRef Data;
+	sf::Clock Clock;
+	sf::Sprite Background;
+	sol::state Script;
+	sol::table Meta;
+	sol::table Splash;
 };

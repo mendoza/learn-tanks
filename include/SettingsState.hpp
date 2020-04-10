@@ -7,15 +7,15 @@
 
 class SettingsState : public Skeleton::State {
 
-public:
-  SettingsState(Skeleton::gameDataRef data);
-  ~SettingsState();
-  void init();
-  void handleInput();
-  void update(float dt);
-  void draw();
+  public:
+	SettingsState(Skeleton::GameDataRef data);
+	~SettingsState();
+	void init();
+	void handleInput();
+	void update(float dt);
+	void draw();
 
-private:
-  Skeleton::gameDataRef data;
-  std::map<std::string, Skeleton::GUI::Button *> buttons;
+  private:
+	Skeleton::GameDataRef Data;
+	std::map<std::string, Skeleton::GUI::Button *> Buttons;
 };

@@ -1,166 +1,169 @@
 #include <GUI.hpp>
 #include <cmath>
-#include <iostream>
+
 namespace Skeleton {
 namespace GUI {
-const float p2pX(float perc, sf::RenderWindow *window) {
-  return std::ceil(static_cast<float>(window->getSize().x) * (perc / 100.f));
+const float p2pX(float Perc, sf::RenderWindow *Window) {
+	return std::ceil(static_cast<float>(Window->getSize().x) * (Perc / 100.f));
 }
 
-const float p2pY(float perc, sf::RenderWindow *window) {
-  return std::ceil(static_cast<float>(window->getSize().y) * (perc / 100.f));
+const float p2pY(float Perc, sf::RenderWindow *Window) {
+	return std::ceil(static_cast<float>(Window->getSize().y) * (Perc / 100.f));
 }
 
-const unsigned calcCharSize(sf::RenderWindow *window, const unsigned modifier) {
-  return static_cast<unsigned>((window->getSize().x + window->getSize().y) /
-                               modifier);
+const unsigned calcCharSize(sf::RenderWindow *Window, const unsigned Modifier) {
+	return static_cast<unsigned>((Window->getSize().x + Window->getSize().y) /
+								 Modifier);
 }
 
-Button::Button(float x, float y, float w, float h, short unsigned id,
-               sf::Font *font, std::string text, unsigned charSize,
-               sf::Color text_idle, sf::Color text_hover, sf::Color text_active,
-               sf::Color idle, sf::Color hover, sf::Color active,
-               sf::SoundBuffer *hoverSound, sf::SoundBuffer *clickSound,
-               sf::Color outline_idle, sf::Color outline_hover,
-               sf::Color outline_active)
-    : Widget(id) {
-  this->buttonState = BTN_IDLE;
+Button::Button(float X, float Y, float W, float H, short unsigned Id,
+			   sf::Font *Font, std::string Text, unsigned CharSize,
+			   sf::Color TextIdleColor, sf::Color TextHoverColor,
+			   sf::Color TextActiveColor, sf::Color IdleColor,
+			   sf::Color HoverColor, sf::Color ActiveColor,
+			   sf::SoundBuffer *HoverSound, sf::SoundBuffer *ClickSound,
+			   sf::Color OutlineIdleColor, sf::Color OutlineHoverColor,
+			   sf::Color OutlineActiveColor)
+	: Widget(Id) {
+	this->ButtonState = BTN_IDLE;
 
-  this->shape.setPosition(sf::Vector2f(x, y));
-  this->shape.setSize(sf::Vector2f(w, h));
-  this->shape.setFillColor(idle);
-  this->shape.setOutlineThickness(1.f);
-  this->shape.setOutlineColor(outline_idle);
+	this->Shape.setPosition(sf::Vector2f(X, Y));
+	this->Shape.setSize(sf::Vector2f(W, H));
+	this->Shape.setFillColor(IdleColor);
+	this->Shape.setOutlineThickness(1.f);
+	this->Shape.setOutlineColor(OutlineIdleColor);
 
-  this->font = font;
-  this->text.setFont(*this->font);
-  this->text.setString(text);
-  this->text.setFillColor(text_idle);
-  this->text.setCharacterSize(charSize);
-  this->text.setPosition(this->shape.getPosition().x +
-                             (this->shape.getGlobalBounds().width / 2.f) -
-                             this->text.getGlobalBounds().width / 2.f,
-                         this->shape.getPosition().y);
+	this->Font = Font;
+	this->Text.setFont(*this->Font);
+	this->Text.setString(Text);
+	this->Text.setFillColor(TextIdleColor);
+	this->Text.setCharacterSize(CharSize);
+	this->Text.setPosition(this->Shape.getPosition().x +
+							   (this->Shape.getGlobalBounds().width / 2.f) -
+							   this->Text.getGlobalBounds().width / 2.f,
+						   this->Shape.getPosition().y);
 
-  this->textIdleColor = text_idle;
-  this->textHoverColor = text_hover;
-  this->textActiveColor = text_active;
+	this->TextIdleColor = TextIdleColor;
+	this->TextHoverColor = TextHoverColor;
+	this->TextActiveColor = TextActiveColor;
 
-  this->idleColor = idle;
-  this->hoverColor = hover;
-  this->activeColor = active;
+	this->IdleColor = IdleColor;
+	this->HoverColor = HoverColor;
+	this->ActiveColor = ActiveColor;
 
-  this->outlineIdleColor = outline_idle;
-  this->outlineHoverColor = outline_hover;
-  this->outlineActiveColor = outline_active;
+	this->OutlineIdleColor = OutlineIdleColor;
+	this->OutlineHoverColor = OutlineHoverColor;
+	this->OutlineActiveColor = OutlineActiveColor;
 
-  this->clickSound = sf::Sound(*clickSound);
-  this->hoverSound = sf::Sound(*hoverSound);
-  this->clickSound.setLoop(false);
-  this->hoverSound.setLoop(false);
+	this->ClickSound = sf::Sound(*ClickSound);
+	this->HoverSound = sf::Sound(*HoverSound);
 
-  this->hasPlayed = false;
+	this->ClickSound.setLoop(false);
+	this->HoverSound.setLoop(false);
+
+	this->HasPlayed = false;
 }
 
-void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-  target.draw(this->shape, states);
-  target.draw(this->text, states);
+void Button::draw(sf::RenderTarget &Target, sf::RenderStates States) const {
+	Target.draw(this->Shape, States);
+	Target.draw(this->Text, States);
 }
 
-void Button::update(const sf::Vector2i mousePos) {
-  this->buttonState = BTN_IDLE;
-  sf::IntRect tempRect(this->shape.getPosition().x, this->shape.getPosition().y,
-                       this->shape.getGlobalBounds().width,
-                       this->shape.getGlobalBounds().height);
-  if (tempRect.contains(mousePos)) {
-    this->buttonState = BTN_HOVER;
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-      this->buttonState = BTN_ACTIVE;
-    }
-  }
+void Button::update(const sf::Vector2i MousePos) {
+	this->ButtonState = BTN_IDLE;
+	sf::IntRect tempRect(this->Shape.getPosition().x,
+						 this->Shape.getPosition().y,
+						 this->Shape.getGlobalBounds().width,
+						 this->Shape.getGlobalBounds().height);
+	if (tempRect.contains(MousePos)) {
+		this->ButtonState = BTN_HOVER;
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+			this->ButtonState = BTN_ACTIVE;
+		}
+	}
 
-  switch (this->buttonState) {
-  case BTN_IDLE:
-    this->hasPlayed = false;
-    this->shape.setFillColor(this->idleColor);
-    this->text.setFillColor(this->textIdleColor);
-    this->shape.setOutlineColor(this->outlineIdleColor);
-    break;
+	switch (this->ButtonState) {
+	case BTN_IDLE:
+		this->HasPlayed = false;
+		this->Shape.setFillColor(this->IdleColor);
+		this->Text.setFillColor(this->TextIdleColor);
+		this->Shape.setOutlineColor(this->OutlineIdleColor);
+		break;
 
-  case BTN_HOVER:
-    if (this->hoverSound.Playing != this->hoverSound.getStatus() &&
-        !hasPlayed) {
-      this->hoverSound.play();
-      this->hasPlayed = true;
-    }
-    this->shape.setFillColor(this->hoverColor);
-    this->text.setFillColor(this->textHoverColor);
-    this->shape.setOutlineColor(this->outlineHoverColor);
-    break;
+	case BTN_HOVER:
+		if (this->HoverSound.Playing != this->HoverSound.getStatus() &&
+			!HasPlayed) {
+			this->HoverSound.play();
+			this->HasPlayed = true;
+		}
+		this->Shape.setFillColor(this->HoverColor);
+		this->Text.setFillColor(this->TextHoverColor);
+		this->Shape.setOutlineColor(this->OutlineHoverColor);
+		break;
 
-  case BTN_ACTIVE:
-    if (this->clickSound.Playing != this->clickSound.getStatus())
-      this->clickSound.play();
-    this->shape.setFillColor(this->activeColor);
-    this->text.setFillColor(this->textActiveColor);
-    this->shape.setOutlineColor(this->outlineActiveColor);
-    break;
+	case BTN_ACTIVE:
+		if (this->ClickSound.Playing != this->ClickSound.getStatus())
+			this->ClickSound.play();
+		this->Shape.setFillColor(this->ActiveColor);
+		this->Text.setFillColor(this->TextActiveColor);
+		this->Shape.setOutlineColor(this->OutlineActiveColor);
+		break;
 
-  default:
-    this->shape.setFillColor(sf::Color::Red);
-    this->text.setFillColor(sf::Color::Blue);
-    this->shape.setOutlineColor(sf::Color::Green);
-    break;
-  }
+	default:
+		this->Shape.setFillColor(sf::Color::Red);
+		this->Text.setFillColor(sf::Color::Blue);
+		this->Shape.setOutlineColor(sf::Color::Green);
+		break;
+	}
 }
 
-const bool Button::isPressed() const { return this->buttonState == BTN_ACTIVE; }
+const bool Button::isPressed() const { return this->ButtonState == BTN_ACTIVE; }
 
-TextField::TextField(float x, float y, float w, float h, short unsigned id,
-                     sf::Font *font, std::string text, unsigned charSize,
-                     sf::Color textColor, sf::Color shapeColor,
-                     sf::Color outlineColor)
-    : Widget(id) {
-  this->shape.setPosition(sf::Vector2f(x, y));
-  this->shape.setSize(sf::Vector2f(w, h));
-  this->shape.setFillColor(shapeColor);
-  this->shape.setOutlineThickness(1.f);
-  this->shape.setOutlineColor(outlineColor);
+TextField::TextField(float X, float Y, float W, float H, short unsigned Id,
+					 sf::Font *Font, std::string Text, unsigned CharSize,
+					 sf::Color TextColor, sf::Color ShapeColor,
+					 sf::Color OutlineColor)
+	: Widget(Id) {
+	this->Shape.setPosition(sf::Vector2f(X, Y));
+	this->Shape.setSize(sf::Vector2f(W, H));
+	this->Shape.setFillColor(ShapeColor);
+	this->Shape.setOutlineThickness(1.f);
+	this->Shape.setOutlineColor(OutlineColor);
 
-  this->font = font;
-  this->text.setFont(*this->font);
-  this->text.setString(text);
-  this->text.setFillColor(textColor);
-  this->text.setCharacterSize(charSize);
-  this->text.setPosition(this->shape.getPosition().x -
-                             this->text.getGlobalBounds().width / 2.f,
-                         this->shape.getPosition().y);
+	this->Font = Font;
+	this->Text.setFont(*this->Font);
+	this->Text.setString(Text);
+	this->Text.setFillColor(TextColor);
+	this->Text.setCharacterSize(CharSize);
+	this->Text.setPosition(this->Shape.getPosition().x -
+							   this->Text.getGlobalBounds().width / 2.f,
+						   this->Shape.getPosition().y);
 
-  this->textColor = textColor;
-  this->shapeColor = shapeColor;
-  this->outlineColor = outlineColor;
+	this->TextColor = TextColor;
+	this->ShapeColor = ShapeColor;
+	this->OutlineColor = OutlineColor;
 }
 
-void TextField::draw(sf::RenderTarget &target, sf::RenderStates states) const {
-  target.draw(this->shape, states);
-  target.draw(this->text, states);
+void TextField::draw(sf::RenderTarget &Target, sf::RenderStates States) const {
+	Target.draw(this->Shape, States);
+	Target.draw(this->Text, States);
 }
 
-void TextField::update(sf::Event event) {
-  if (sf::Event::TextEntered == event.type &&
-      (this->text.getGlobalBounds().width <=
-           this->shape.getGlobalBounds().width ||
-       event.text.unicode == '\b')) {
-    std::string str = this->text.getString();
-    if (event.text.unicode == '\b')
-      str = str.substr(0, str.size() - 1);
-    else if (event.text.unicode < 128)
-      str += static_cast<char>(event.text.unicode);
-    this->setText(str);
-  }
+void TextField::update(sf::Event Event) {
+	if (sf::Event::TextEntered == Event.type &&
+		(this->Text.getGlobalBounds().width <=
+			 this->Shape.getGlobalBounds().width ||
+		 Event.text.unicode == '\b')) {
+		std::string str = this->Text.getString();
+		if (Event.text.unicode == '\b')
+			str = str.substr(0, str.size() - 1);
+		else if (Event.text.unicode < 128)
+			str += static_cast<char>(Event.text.unicode);
+		this->setText(str);
+	}
 }
-std::string TextField::getText() { return this->text.getString(); }
+std::string TextField::getText() { return this->Text.getString(); }
 
-void TextField::setText(std::string text) { this->text.setString(text); }
+void TextField::setText(std::string Text) { this->Text.setString(Text); }
 }; // namespace GUI
 }; // namespace Skeleton

@@ -6,18 +6,18 @@
 
 class GameState : public Skeleton::State {
 
-public:
-  GameState(Skeleton::gameDataRef data);
-  void init();
-  void handleInput();
-  void update(float dt);
-  void draw();
+  public:
+	GameState(Skeleton::GameDataRef Data);
+	void init();
+	void handleInput();
+	void update(float dt);
+	void draw();
 
-private:
-  Skeleton::gameDataRef data;
-  sf::Sprite background;
-  sol::state script;
-  Skeleton::Entity redTank;
-  Skeleton::EntityManager tanks;
-  Skeleton::SystemManager systems;
+  private:
+	Skeleton::GameDataRef Data;
+	sf::Sprite Background;
+	sol::state Script;
+	ecs::Entity RedTank;
+	ecs::EntityManager Tanks;
+	ecs::SystemManager Systems;
 };

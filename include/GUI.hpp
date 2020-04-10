@@ -3,85 +3,87 @@
 #include <SFML/Graphics.hpp>
 namespace Skeleton {
 namespace GUI {
-enum button_states { BTN_IDLE = 0, BTN_HOVER, BTN_ACTIVE };
-const float p2pX(float perc, sf::RenderWindow *window);
-const float p2pY(float perc, sf::RenderWindow *window);
-const unsigned calcCharSize(sf::RenderWindow *window,
-                            const unsigned modifier = 60);
+enum ButtonStates { BTN_IDLE = 0, BTN_HOVER, BTN_ACTIVE };
+const float p2pX(float Perc, sf::RenderWindow *Window);
+const float p2pY(float Perc, sf::RenderWindow *Window);
+const unsigned calcCharSize(sf::RenderWindow *Window,
+							const unsigned Modifier = 60);
 
 class Widget : public sf::Drawable {
-public:
-  Widget(short unsigned id) { this->id = id; }
-  ~Widget() {}
+  public:
+	Widget(short unsigned Id) { this->Id = Id; }
+	~Widget() {}
 
-private:
-  short unsigned id;
-  virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const {}
-  virtual void update() {}
+  private:
+	short unsigned Id;
+	virtual void draw(sf::RenderTarget &Target, sf::RenderStates States) const {
+	}
+	virtual void update() {}
 };
 
 class Button : public Widget {
-  short unsigned buttonState;
+	short unsigned ButtonState;
 
-public:
-  Button(float x, float y, float w, float h, short unsigned id, sf::Font *font,
-         std::string text, unsigned charSize, sf::Color text_idle,
-         sf::Color text_hover, sf::Color text_active, sf::Color idle,
-         sf::Color hover, sf::Color active, sf::SoundBuffer *hoverSound,
-         sf::SoundBuffer *click,
-         sf::Color outline_idle = sf::Color::Transparent,
-         sf::Color outline_hover = sf::Color::Transparent,
-         sf::Color outline_active = sf::Color::Transparent);
-  ~Button() { delete this->font; }
-  virtual void update(const sf::Vector2i mousePos);
-  const bool isPressed() const;
+  public:
+	Button(float X, float Y, float W, float H, short unsigned Id,
+		   sf::Font *Font, std::string Text, unsigned CharSize,
+		   sf::Color TextIdle, sf::Color TextHover, sf::Color TextActive,
+		   sf::Color Idle, sf::Color Hover, sf::Color Active,
+		   sf::SoundBuffer *HoverSound, sf::SoundBuffer *ClickSound,
+		   sf::Color OutlineIdle = sf::Color::Transparent,
+		   sf::Color OutlineHover = sf::Color::Transparent,
+		   sf::Color OutlineActive = sf::Color::Transparent);
+	~Button() { delete this->Font; }
+	virtual void update(const sf::Vector2i MousePos);
+	const bool isPressed() const;
 
-private:
-  virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+  private:
+	virtual void draw(sf::RenderTarget &Target, sf::RenderStates States) const;
 
-  bool hasPlayed;
+	bool HasPlayed;
 
-  sf::RectangleShape shape;
-  sf::Font *font;
-  sf::Text text;
+	sf::RectangleShape Shape;
+	sf::Font *Font;
+	sf::Text Text;
 
-  sf::Color textIdleColor;
-  sf::Color textHoverColor;
-  sf::Color textActiveColor;
+	sf::Color TextIdleColor;
+	sf::Color TextHoverColor;
+	sf::Color TextActiveColor;
 
-  sf::Color idleColor;
-  sf::Color hoverColor;
-  sf::Color activeColor;
+	sf::Color IdleColor;
+	sf::Color HoverColor;
+	sf::Color ActiveColor;
 
-  sf::Color outlineIdleColor;
-  sf::Color outlineHoverColor;
-  sf::Color outlineActiveColor;
+	sf::Color OutlineIdleColor;
+	sf::Color OutlineHoverColor;
+	sf::Color OutlineActiveColor;
 
-  sf::Sound hoverSound;
-  sf::Sound clickSound;
+	sf::Sound HoverSound;
+	sf::Sound ClickSound;
 };
 
 class TextField : public Widget {
-public:
-  TextField(float x, float y, float w, float h, short unsigned id,
-            sf::Font *font, std::string text, unsigned charSize,
-            sf::Color textColor, sf::Color shapeColor, sf::Color outlineColor);
-  ~TextField() { delete this->font; }
-  virtual void update(sf::Event event);
-  std::string getText();
-  void setText(std::string text);
+  public:
+	TextField(float X, float Y, float W, float H, short unsigned Id,
+			  sf::Font *Font, std::string Text, unsigned CharSize,
+			  sf::Color TextColor, sf::Color ShapeColor,
+			  sf::Color OutlineColor);
+	~TextField() { delete this->Font; }
+	virtual void update(sf::Event Event);
+	std::string getText();
+	void setText(std::string Text);
 
-private:
-  virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
-  sf::RectangleShape shape;
-  sf::Font *font;
-  sf::Text text;
+  private:
+	virtual void draw(sf::RenderTarget &Target, sf::RenderStates States) const;
+	sf::RectangleShape Shape;
+	sf::Font *Font;
+	sf::Text Text;
 
-  sf::Color textColor;
+	sf::Color TextColor;
 
-  sf::Color shapeColor;
+	sf::Color ShapeColor;
 
-  sf::Color outlineColor;
+	sf::Color OutlineColor;
 };
 } // namespace GUI
 }; // namespace Skeleton

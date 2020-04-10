@@ -1,40 +1,40 @@
 #include <MenuState.hpp>
 #include <SplashState.hpp>
 
-SplashState::SplashState(Skeleton::gameDataRef data) : data(data) {
-  this->script.script_file("scripts/MetaData.lua");
-  this->meta = script["MetaData"];
-  this->splash = script["MetaData"]["splash"];
-}
+SplashState::SplashState(Skeleton::GameDataRef data) : Data(data) {}
 
 void SplashState::init() {
-  std::string filePath = this->splash["backgroundImageFile"];
-  this->data->assets.loadTexture("Splash State Background", filePath);
-  this->background.setTexture(
-      this->data->assets.getTexture("Splash State Background"));
+	this->Script.script_file("scripts/MetaData.lua");
+	this->Meta = this->Script["MetaData"];
+	this->Splash = this->Script["MetaData"]["splash"];
+	std::string filePath = this->Splash["backgroundImageFile"];
+	this->Data->Assets.loadTexture("Splash State Background", filePath);
+	this->Background.setTexture(
+		this->Data->Assets.getTexture("Splash State Background"));
 }
 
 void SplashState::handleInput() {
-  sf::Event event;
-  while (this->data->window.pollEvent(event)) {
-    if (sf::Event::Closed == event.type) {
-      this->data->window.close();
-    }
-  }
+	sf::Event event;
+	while (this->Data->Window.pollEvent(event)) {
+		if (sf::Event::Closed == event.type) {
+			this->Data->Window.close();
+		}
+	}
 }
 
 void SplashState::update(float dt) {
-  float time = this->splash["time"];
-  if (this->clock.getElapsedTime().asSeconds() > time) {
-    this->data->machine.addState(Skeleton::StateRef(new MenuState(this->data)));
-  }
+	float Time = this->Splash["time"];
+	if (this->Clock.getElapsedTime().asSeconds() > Time) {
+		this->Data->Machine.addState(
+			Skeleton::StateRef(new MenuState(this->Data)));
+	}
 }
 
 void SplashState::draw() {
-  int r = this->splash["background"]["r"];
-  int g = this->splash["background"]["g"];
-  int b = this->splash["background"]["b"];
-  this->data->window.clear(sf::Color(r, g, b));
-  this->data->window.draw(this->background);
-  this->data->window.display();
+	int r = this->Splash["background"]["r"];
+	int g = this->Splash["background"]["g"];
+	int b = this->Splash["background"]["b"];
+	this->Data->Window.clear(sf::Color(r, g, b));
+	this->Data->Window.draw(this->Background);
+	this->Data->Window.display();
 }
