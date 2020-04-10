@@ -1,12 +1,14 @@
-#include <Game.hpp>
+#include <Engine.hpp>
 #include <SplashState.hpp>
 
 namespace Skeleton {
-Game::Game(int width, int height, std::string title, std::string iconFile,
-           int limit) {
+Engine::Engine(int width, int height, std::string title, std::string iconFile,
+               int limit, bool vSync) {
   sf::Image image;
   image.loadFromFile(iconFile);
-  this->data->window.create(sf::VideoMode(width, height), title);
+  this->data->window.create(sf::VideoMode(width, height), title,
+                            sf::Style::Titlebar | sf::Style::Close);
+  this->data->window.setVerticalSyncEnabled(vSync);
   this->data->window.setIcon(image.getSize().x, image.getSize().y,
                              image.getPixelsPtr());
   this->data->window.setFramerateLimit(limit);
@@ -14,7 +16,7 @@ Game::Game(int width, int height, std::string title, std::string iconFile,
   this->run();
 }
 
-void Game::run() {
+void Engine::run() {
   float frametime;
   float accumulator = 0.0f;
   while (this->data->window.isOpen()) {
@@ -25,10 +27,8 @@ void Game::run() {
       this->data->machine.getActiveState()->handleInput();
       this->data->machine.getActiveState()->update(dt);
     }
-
     frametime = this->_clock.restart().asSeconds();
     accumulator += frametime;
-    // printf("FPS: %d\n", (int)(1.0f / frametime));
     this->data->machine.getActiveState()->draw();
   }
 }

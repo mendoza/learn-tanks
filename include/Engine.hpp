@@ -18,9 +18,10 @@ struct gameData {
 };
 
 typedef std::shared_ptr<gameData> gameDataRef;
-class Game {
+class Engine {
 public:
-  Game(int width, int height, std::string title, std::string, int limit = 60);
+  Engine(int width, int height, std::string title, std::string, int limit = 60,
+       bool vSync = false);
 
 private:
   sf::Clock _clock;
