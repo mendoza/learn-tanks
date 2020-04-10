@@ -3,7 +3,6 @@
 #include <SFML/Graphics.hpp>
 #include <sol.hpp>
 
-namespace Skeleton {
 class Component {
 public:
   virtual void update(float dt){};
@@ -23,7 +22,7 @@ public:
   bool animated = false;
   int row = 0;
 
-  GraphicComponent(gameDataRef data, sol::table gc) {
+  GraphicComponent(Skeleton::gameDataRef data, sol::table gc) {
     this->name = gc["spriteName"];
     data->assets.loadTexture(this->name, gc["spriteFilepath"]);
     sf::Texture &text = data->assets.getTexture(this->name);
@@ -50,5 +49,3 @@ public:
     }
   }
 };
-
-} // namespace Skeleton

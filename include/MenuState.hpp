@@ -2,14 +2,12 @@
 #include <Engine.hpp>
 #include <GUI.hpp>
 #include <SFML/Graphics.hpp>
-#include <State.hpp>
 #include <sol.hpp>
 
-namespace Skeleton {
-class MenuState : public State {
+class MenuState : public Skeleton::State {
 
 public:
-  MenuState(gameDataRef data);
+  MenuState(Skeleton::gameDataRef data);
   ~MenuState();
   void init();
   void handleInput();
@@ -17,8 +15,7 @@ public:
   void draw();
 
 private:
-  gameDataRef data;
-  std::map<std::string, GUI::Button *> buttons;
+  Skeleton::gameDataRef data;
+  std::map<std::string, Skeleton::GUI::Button *> buttons;
   sf::Sprite background;
 };
-} // namespace Skeleton

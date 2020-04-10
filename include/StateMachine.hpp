@@ -23,4 +23,4 @@ private:
   bool isAdding;
   bool isReplacing;
 };
-} // namespace Skeleton
+}; // namespace Skeleton

@@ -1,9 +1,7 @@
 #pragma once
-
 namespace Skeleton {
-
 class State {
-
+  
 public:
   virtual void init() = 0;
   virtual void handleInput() = 0;

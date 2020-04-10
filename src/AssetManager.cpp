@@ -33,5 +33,4 @@ void AssetManager::loadSound(std::string name, std::string filename) {
 sf::SoundBuffer &AssetManager::getSound(std::string name) {
   return this->soundBuffers.at(name);
 }
-
-} // namespace Skeleton
+}; // namespace Skeleton

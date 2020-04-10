@@ -1,7 +1,7 @@
 #include <GUI.hpp>
 #include <cmath>
 #include <iostream>
-
+namespace Skeleton {
 namespace GUI {
 const float p2pX(float perc, sf::RenderWindow *window) {
   return std::ceil(static_cast<float>(window->getSize().x) * (perc / 100.f));
@@ -162,4 +162,5 @@ void TextField::update(sf::Event event) {
 std::string TextField::getText() { return this->text.getString(); }
 
 void TextField::setText(std::string text) { this->text.setString(text); }
-} // namespace GUI
+}; // namespace GUI
+}; // namespace Skeleton

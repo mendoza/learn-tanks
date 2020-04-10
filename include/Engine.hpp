@@ -3,6 +3,7 @@
 #include <ECS.hpp>
 #include <InputManager.hpp>
 #include <SFML/Graphics.hpp>
+#include <State.hpp>
 #include <StateMachine.hpp>
 #include <memory>
 #include <string>
@@ -21,7 +22,7 @@ typedef std::shared_ptr<gameData> gameDataRef;
 class Engine {
 public:
   Engine(int width, int height, std::string title, std::string, int limit = 60,
-       bool vSync = false);
+         bool vSync = false);
 
 private:
   sf::Clock _clock;
@@ -29,4 +30,4 @@ private:
   gameDataRef data = std::make_shared<gameData>();
   void run();
 };
-} // namespace Skeleton
+}; // namespace Skeleton

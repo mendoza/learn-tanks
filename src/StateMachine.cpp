@@ -1,7 +1,6 @@
 #include <StateMachine.hpp>
 
 namespace Skeleton {
-
 void StateMachine::addState(StateRef newState, bool isReplacing) {
   this->isAdding = true;
   this->isReplacing = isReplacing;

@@ -2,8 +2,7 @@
 #include <GameState.hpp>
 #include <Systems.hpp>
 
-namespace Skeleton {
-GameState::GameState(gameDataRef data) : systems(tanks) {
+GameState::GameState(Skeleton::gameDataRef data) : systems(tanks) {
   this->data = data;
   this->script.script_file("scripts/RedTank.lua");
 }
@@ -32,4 +31,3 @@ void GameState::update(float dt) {
 }
 
 void GameState::draw() { this->data->window.display(); }
-} // namespace Skeleton

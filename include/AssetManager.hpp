@@ -24,5 +24,4 @@ private:
   std::map<std::string, sf::Font> fonts;
   std::map<std::string, sf::SoundBuffer> soundBuffers;
 };
-
 }; // namespace Skeleton

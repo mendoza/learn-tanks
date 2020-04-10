@@ -32,4 +32,4 @@ void Engine::run() {
     this->data->machine.getActiveState()->draw();
   }
 }
-} // namespace Skeleton
+}; // namespace Skeleton

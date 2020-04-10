@@ -4,22 +4,20 @@
 #include <State.hpp>
 #include <sol.hpp>
 
-namespace Skeleton {
-class GameState : public State {
+class GameState : public Skeleton::State {
 
 public:
-  GameState(gameDataRef data);
+  GameState(Skeleton::gameDataRef data);
   void init();
   void handleInput();
   void update(float dt);
   void draw();
 
 private:
-  gameDataRef data;
+  Skeleton::gameDataRef data;
   sf::Sprite background;
   sol::state script;
-  Entity redTank;
-  EntityManager tanks;
-  SystemManager systems;
+  Skeleton::Entity redTank;
+  Skeleton::EntityManager tanks;
+  Skeleton::SystemManager systems;
 };
-} // namespace Skeleton

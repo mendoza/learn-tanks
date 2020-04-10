@@ -11,4 +11,4 @@ public:
 
   sf::Vector2i getMousePosition(sf::RenderWindow &window);
 };
-} // namespace Skeleton
+}; // namespace Skeleton

@@ -1,5 +1,7 @@
+#pragma once
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
+namespace Skeleton {
 namespace GUI {
 enum button_states { BTN_IDLE = 0, BTN_HOVER, BTN_ACTIVE };
 const float p2pX(float perc, sf::RenderWindow *window);
@@ -82,3 +84,4 @@ private:
   sf::Color outlineColor;
 };
 } // namespace GUI
+}; // namespace Skeleton

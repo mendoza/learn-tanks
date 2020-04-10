@@ -1,9 +1,7 @@
 #include <MenuState.hpp>
 #include <SplashState.hpp>
-#include <iostream>
 
-namespace Skeleton {
-SplashState::SplashState(gameDataRef data) : data(data) {
+SplashState::SplashState(Skeleton::gameDataRef data) : data(data) {
   this->script.script_file("scripts/MetaData.lua");
   this->meta = script["MetaData"];
   this->splash = script["MetaData"]["splash"];
@@ -28,7 +26,7 @@ void SplashState::handleInput() {
 void SplashState::update(float dt) {
   float time = this->splash["time"];
   if (this->clock.getElapsedTime().asSeconds() > time) {
-    this->data->machine.addState(StateRef(new MenuState(this->data)));
+    this->data->machine.addState(Skeleton::StateRef(new MenuState(this->data)));
   }
 }
 
@@ -40,4 +38,3 @@ void SplashState::draw() {
   this->data->window.draw(this->background);
   this->data->window.display();
 }
-} // namespace Skeleton
