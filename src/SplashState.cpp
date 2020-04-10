@@ -4,7 +4,7 @@
 
 namespace Skeleton {
 SplashState::SplashState(gameDataRef data) : data(data) {
-  this->script.script_file("scripts/metadata.lua");
+  this->script.script_file("scripts/MetaData.lua");
   this->meta = script["MetaData"];
   this->splash = script["MetaData"]["splash"];
 }
