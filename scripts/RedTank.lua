@@ -7,8 +7,8 @@ Tank = {
             height = 1
         },
         origin = {
-            x = 64,
-            y = 64
+            x = 32,
+            y = 32
         }
     },
     logicalComponent = {}
