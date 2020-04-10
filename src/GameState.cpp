@@ -6,13 +6,15 @@ namespace Skeleton {
 GameState::GameState(gameDataRef data) : systems(tanks) {
   this->data = data;
   this->script.script_file("scripts/RedTank.lua");
+}
+
+void GameState::init() {
   sol::table player = this->script["Tank"];
   this->redTank = this->tanks.create();
   this->redTank.add<GraphicComponent>(this->data, player["graphicComponent"]);
+  this->redTank.get<GraphicComponent>().sprite.setPosition(200, 200);
   this->systems.add<drawGraphicSystem>(this->data);
 }
-
-void GameState::init() {}
 
 void GameState::handleInput() {
   sf::Event event;
