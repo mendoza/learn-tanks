@@ -1,3 +1,4 @@
+#include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 namespace GUI {
 enum button_states { BTN_IDLE = 0, BTN_HOVER, BTN_ACTIVE };
@@ -24,7 +25,8 @@ public:
   Button(float x, float y, float w, float h, short unsigned id, sf::Font *font,
          std::string text, unsigned charSize, sf::Color text_idle,
          sf::Color text_hover, sf::Color text_active, sf::Color idle,
-         sf::Color hover, sf::Color active,
+         sf::Color hover, sf::Color active, sf::SoundBuffer *hoverSound,
+         sf::SoundBuffer *click,
          sf::Color outline_idle = sf::Color::Transparent,
          sf::Color outline_hover = sf::Color::Transparent,
          sf::Color outline_active = sf::Color::Transparent);
@@ -34,6 +36,9 @@ public:
 
 private:
   virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+
+  bool hasPlayed;
+
   sf::RectangleShape shape;
   sf::Font *font;
   sf::Text text;
@@ -49,6 +54,9 @@ private:
   sf::Color outlineIdleColor;
   sf::Color outlineHoverColor;
   sf::Color outlineActiveColor;
+
+  sf::Sound hoverSound;
+  sf::Sound clickSound;
 };
 
 class TextField : public Widget {

@@ -20,6 +20,7 @@ Button::Button(float x, float y, float w, float h, short unsigned id,
                sf::Font *font, std::string text, unsigned charSize,
                sf::Color text_idle, sf::Color text_hover, sf::Color text_active,
                sf::Color idle, sf::Color hover, sf::Color active,
+               sf::SoundBuffer *hoverSound, sf::SoundBuffer *clickSound,
                sf::Color outline_idle, sf::Color outline_hover,
                sf::Color outline_active)
     : Widget(id) {
@@ -52,6 +53,13 @@ Button::Button(float x, float y, float w, float h, short unsigned id,
   this->outlineIdleColor = outline_idle;
   this->outlineHoverColor = outline_hover;
   this->outlineActiveColor = outline_active;
+
+  this->clickSound = sf::Sound(*clickSound);
+  this->hoverSound = sf::Sound(*hoverSound);
+  this->clickSound.setLoop(false);
+  this->hoverSound.setLoop(false);
+
+  this->hasPlayed = false;
 }
 
 void Button::draw(sf::RenderTarget &target, sf::RenderStates states) const {
@@ -73,18 +81,26 @@ void Button::update(const sf::Vector2i mousePos) {
 
   switch (this->buttonState) {
   case BTN_IDLE:
+    this->hasPlayed = false;
     this->shape.setFillColor(this->idleColor);
     this->text.setFillColor(this->textIdleColor);
     this->shape.setOutlineColor(this->outlineIdleColor);
     break;
 
   case BTN_HOVER:
+    if (this->hoverSound.Playing != this->hoverSound.getStatus() &&
+        !hasPlayed) {
+      this->hoverSound.play();
+      this->hasPlayed = true;
+    }
     this->shape.setFillColor(this->hoverColor);
     this->text.setFillColor(this->textHoverColor);
     this->shape.setOutlineColor(this->outlineHoverColor);
     break;
 
   case BTN_ACTIVE:
+    if (this->clickSound.Playing != this->clickSound.getStatus())
+      this->clickSound.play();
     this->shape.setFillColor(this->activeColor);
     this->text.setFillColor(this->textActiveColor);
     this->shape.setOutlineColor(this->outlineActiveColor);

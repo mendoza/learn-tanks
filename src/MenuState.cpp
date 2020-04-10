@@ -8,6 +8,8 @@ MenuState::MenuState(gameDataRef data) { this->data = data; }
 
 void MenuState::init() {
   this->data->assets.loadFont("GameFont", "assets/Fonts/ARCADECLASSIC.TTF");
+  this->data->assets.loadSound("hoverSound", "assets/Sounds/hover.wav");
+  this->data->assets.loadSound("clickSound", "assets/Sounds/click.wav");
 
   this->buttons["GAME_STATE"] = new GUI::Button(
       GUI::p2pX(15.6f, &this->data->window),
@@ -16,8 +18,9 @@ void MenuState::init() {
       0, &this->data->assets.getFont("GameFont"), "Start Game",
       GUI::calcCharSize(&this->data->window), sf::Color(200, 200, 200, 200),
       sf::Color(255, 255, 255, 255), sf::Color(20, 20, 20, 50),
-      sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0),
-      sf::Color(20, 20, 20, 0));
+      sf::Color(20, 20, 20, 0), sf::Color(70, 70, 70, 0),
+      sf::Color(150, 150, 150, 0), &this->data->assets.getSound("hoverSound"),
+      &this->data->assets.getSound("clickSound"));
 
   this->buttons["SETTINGS_STATE"] = new GUI::Button(
       GUI::p2pX(15.6f, &this->data->window),
@@ -27,7 +30,8 @@ void MenuState::init() {
       GUI::calcCharSize(&this->data->window), sf::Color(200, 200, 200, 200),
       sf::Color(255, 255, 255, 255), sf::Color(20, 20, 20, 50),
       sf::Color(70, 70, 70, 0), sf::Color(150, 150, 150, 0),
-      sf::Color(20, 20, 20, 0));
+      sf::Color(20, 20, 20, 0), &this->data->assets.getSound("hoverSound"),
+      &this->data->assets.getSound("clickSound"));
 
   this->buttons["EXIT_STATE"] = new GUI::Button(
       GUI::p2pX(15.6f, &this->data->window),
@@ -37,7 +41,8 @@ void MenuState::init() {
       GUI::calcCharSize(&this->data->window), sf::Color(200, 200, 200, 200),
       sf::Color(255, 255, 255, 255), sf::Color(20, 20, 20, 50),
       sf::Color(100, 100, 100, 0), sf::Color(150, 150, 150, 0),
-      sf::Color(20, 20, 20, 0));
+      sf::Color(20, 20, 20, 0), &this->data->assets.getSound("hoverSound"),
+      &this->data->assets.getSound("clickSound"));
 }
 
 MenuState::~MenuState() {
