@@ -49,3 +49,17 @@ class GraphicComponent : public Component {
 		}
 	}
 };
+
+class LogicComponent : public Component {
+  public:
+	sol::state L;
+	sol::function updates;
+	LogicComponent(std::string Path) {
+		L.script_file(Path);
+		L.open_libraries();
+		this->updates = L["Tank"]["logicalComponent"]["update"];
+	}
+	void update(float dt) override { this->updates(); }
+
+	void draw() override {}
+};
