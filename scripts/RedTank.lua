@@ -11,5 +11,9 @@ Tank = {
             y = 32
         }
     },
-    logicalComponent = {}
+    logicalComponent = {
+        update = function ()
+            rotate(600)
+        end
+    }
 }
