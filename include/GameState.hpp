@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <State.hpp>
 #include <sol.hpp>
+#include <Tank.hpp>
+
 
 class GameState : public Skeleton::State {
 
@@ -17,7 +19,7 @@ class GameState : public Skeleton::State {
 	Skeleton::GameDataRef Data;
 	sf::Sprite Background;
 	sol::state Script;
-	ecs::Entity RedTank;
+	Tank RedTank;
 	ecs::EntityManager Tanks;
 	ecs::SystemManager Systems;
 };

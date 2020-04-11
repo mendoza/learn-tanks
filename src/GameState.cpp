@@ -6,11 +6,12 @@ GameState::GameState(Skeleton::GameDataRef Data) : Systems(Tanks), Data(Data) {}
 
 void GameState::init() {
 	this->Script.script_file("scripts/RedTank.lua");
-	sol::table Tank = this->Script["Tank"];
-	this->RedTank = this->Tanks.create();
-	this->RedTank.add<GraphicComponent>(this->Data, Tank["graphicComponent"]);
+	sol::table Player = this->Script["Tank"];
+	this->RedTank = this->Tanks.create<Tank>(this->Data, "scripts/RedTank.lua",
+											 Player["graphicComponent"]);
 	this->RedTank.get<GraphicComponent>().Sprite.setPosition(200, 200);
-	this->Systems.add<drawGraphicSystem>(this->Data);
+	this->Systems.add<GraphicSystem>(this->Data);
+	this->Systems.add<LogicSystem>();
 }
 
 void GameState::handleInput() {
@@ -25,7 +26,6 @@ void GameState::handleInput() {
 void GameState::update(float dt) {
 	this->Data->Window.clear(sf::Color(125, 125, 125));
 	this->Systems.update(dt);
-	this->RedTank.get<GraphicComponent>().Sprite.rotate(45);
 }
 
 void GameState::draw() { this->Data->Window.display(); }
