@@ -13,11 +13,18 @@ class Widget : public sf::Drawable {
 	Widget(short unsigned Id) { this->Id = Id; }
 	~Widget() {}
 
+  protected:
+	sf::RectangleShape Shape;
+	sf::RectangleShape DebugShape;
+	bool ShowDebug;
+	sf::Font *Font;
+	sf::Text Text;
+
   private:
 	short unsigned Id;
-	virtual void draw(sf::RenderTarget &Target, sf::RenderStates States) const {
-	}
-	virtual void update() {}
+	virtual void draw(sf::RenderTarget &Target,
+					  sf::RenderStates States) const {};
+	virtual void update(){};
 };
 
 class Button : public Widget {
@@ -31,7 +38,8 @@ class Button : public Widget {
 		   sf::SoundBuffer *HoverSound, sf::SoundBuffer *ClickSound,
 		   sf::Color OutlineIdle = sf::Color::Transparent,
 		   sf::Color OutlineHover = sf::Color::Transparent,
-		   sf::Color OutlineActive = sf::Color::Transparent);
+		   sf::Color OutlineActive = sf::Color::Transparent,
+		   bool ShowDebug = false);
 	~Button() { delete this->Font; }
 	virtual void update(const sf::Vector2i MousePos);
 	const bool isPressed() const;
@@ -40,10 +48,6 @@ class Button : public Widget {
 	virtual void draw(sf::RenderTarget &Target, sf::RenderStates States) const;
 
 	bool HasPlayed;
-
-	sf::RectangleShape Shape;
-	sf::Font *Font;
-	sf::Text Text;
 
 	sf::Color TextIdleColor;
 	sf::Color TextHoverColor;
@@ -65,8 +69,8 @@ class TextField : public Widget {
   public:
 	TextField(float X, float Y, float W, float H, short unsigned Id,
 			  sf::Font *Font, std::string Text, unsigned CharSize,
-			  sf::Color TextColor, sf::Color ShapeColor,
-			  sf::Color OutlineColor);
+			  sf::Color TextColor, sf::Color ShapeColor, sf::Color OutlineColor,
+			  bool ShowDebug = false);
 	~TextField() { delete this->Font; }
 	virtual void update(sf::Event Event);
 	std::string getText();
@@ -74,9 +78,6 @@ class TextField : public Widget {
 
   private:
 	virtual void draw(sf::RenderTarget &Target, sf::RenderStates States) const;
-	sf::RectangleShape Shape;
-	sf::Font *Font;
-	sf::Text Text;
 
 	sf::Color TextColor;
 

@@ -23,10 +23,17 @@ Button::Button(float X, float Y, float W, float H, short unsigned Id,
 			   sf::Color HoverColor, sf::Color ActiveColor,
 			   sf::SoundBuffer *HoverSound, sf::SoundBuffer *ClickSound,
 			   sf::Color OutlineIdleColor, sf::Color OutlineHoverColor,
-			   sf::Color OutlineActiveColor)
+			   sf::Color OutlineActiveColor, bool ShowDebug)
 	: Widget(Id) {
 	this->ButtonState = BTN_IDLE;
-
+	this->ShowDebug = ShowDebug;
+	if (ShowDebug) {
+		this->DebugShape.setPosition(sf::Vector2f(X, Y));
+		this->DebugShape.setSize(sf::Vector2f(W, H));
+		this->DebugShape.setFillColor(sf::Color::Transparent);
+		this->DebugShape.setOutlineThickness(5.f);
+		this->DebugShape.setOutlineColor(sf::Color::White);
+	}
 	this->Shape.setPosition(sf::Vector2f(X, Y));
 	this->Shape.setSize(sf::Vector2f(W, H));
 	this->Shape.setFillColor(IdleColor);
@@ -65,6 +72,8 @@ Button::Button(float X, float Y, float W, float H, short unsigned Id,
 }
 
 void Button::draw(sf::RenderTarget &Target, sf::RenderStates States) const {
+	if (this->ShowDebug)
+		Target.draw(this->DebugShape, States);
 	Target.draw(this->Shape, States);
 	Target.draw(this->Text, States);
 }
@@ -122,8 +131,16 @@ const bool Button::isPressed() const { return this->ButtonState == BTN_ACTIVE; }
 TextField::TextField(float X, float Y, float W, float H, short unsigned Id,
 					 sf::Font *Font, std::string Text, unsigned CharSize,
 					 sf::Color TextColor, sf::Color ShapeColor,
-					 sf::Color OutlineColor)
+					 sf::Color OutlineColor, bool ShowDebug)
 	: Widget(Id) {
+	this->ShowDebug = ShowDebug;
+	if (ShowDebug) {
+		this->DebugShape.setPosition(sf::Vector2f(X, Y));
+		this->DebugShape.setSize(sf::Vector2f(W, H));
+		this->DebugShape.setFillColor(sf::Color::Transparent);
+		this->DebugShape.setOutlineThickness(5.f);
+		this->DebugShape.setOutlineColor(sf::Color::White);
+	}
 	this->Shape.setPosition(sf::Vector2f(X, Y));
 	this->Shape.setSize(sf::Vector2f(W, H));
 	this->Shape.setFillColor(ShapeColor);
@@ -145,6 +162,8 @@ TextField::TextField(float X, float Y, float W, float H, short unsigned Id,
 }
 
 void TextField::draw(sf::RenderTarget &Target, sf::RenderStates States) const {
+	if (this->ShowDebug)
+		Target.draw(this->DebugShape, States);
 	Target.draw(this->Shape, States);
 	Target.draw(this->Text, States);
 }
