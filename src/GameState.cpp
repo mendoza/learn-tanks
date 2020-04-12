@@ -9,11 +9,10 @@ void GameState::init() {
 	this->Script.script_file("scripts/RedTank.lua");
 	sol::table Player = this->Script["Tank"];
 	this->RedTank = this->Tanks.create<Tank>(
-		this->Data, Player["graphicComponent"], "scripts/RedTank.lua", 0);
+		this->Data, Player["movableGraphicComponent"], "scripts/RedTank.lua");
 
-	this->RedTankSystem.add<GraphicSystem>(this->Data);
+	this->RedTankSystem.add<MovableGraphicSystem>(this->Data);
 	this->RedTankSystem.add<LogicSystem>();
-	this->RedTankSystem.add<MovableSystem>();
 }
 
 void GameState::handleInput() {
