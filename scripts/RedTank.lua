@@ -1,7 +1,8 @@
 Tank = {
-    graphicComponent = {
+    movableGraphicComponent = {
         spriteName = "RedTank",
         spriteFilepath = "assets/Sprites/RedTank.png",
+        sped = 5,
         scale = {
             width = 1,
             height = 1
@@ -13,11 +14,16 @@ Tank = {
         position = {
             x = 200,
             y = 200
+        },
+        spriteOrientation = {
+            x = 0,
+            y = 1
         }
     },
     logicalComponent = {
         update = function ()
-            move()
+            rotate(90)
+            stop()
         end
     }
 }
