@@ -7,8 +7,8 @@ class Tank : public ecs::EntityAlias<GraphicComponent, LogicComponent,
 	Tank(Skeleton::GameDataRef Data, sol::table GC, std::string Path,
 		 float Speed);
 	~Tank();
-	const void rotate(float Angle);
-	const void move();
+	void rotate(float Angle);
+	void move();
 
   private:
 };

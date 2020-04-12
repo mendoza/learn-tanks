@@ -3,15 +3,15 @@
 
 namespace Skeleton {
 namespace GUI {
-const float p2pX(float Perc, sf::RenderWindow *Window) {
+float p2pX(float Perc, sf::RenderWindow *Window) {
 	return std::ceil(static_cast<float>(Window->getSize().x) * (Perc / 100.f));
 }
 
-const float p2pY(float Perc, sf::RenderWindow *Window) {
+float p2pY(float Perc, sf::RenderWindow *Window) {
 	return std::ceil(static_cast<float>(Window->getSize().y) * (Perc / 100.f));
 }
 
-const unsigned calcCharSize(sf::RenderWindow *Window, const unsigned Modifier) {
+unsigned calcCharSize(sf::RenderWindow *Window, const unsigned Modifier) {
 	return static_cast<unsigned>((Window->getSize().x + Window->getSize().y) /
 								 Modifier);
 }

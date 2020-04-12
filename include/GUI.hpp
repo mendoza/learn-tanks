@@ -4,10 +4,9 @@
 namespace Skeleton {
 namespace GUI {
 enum ButtonStates { BTN_IDLE = 0, BTN_HOVER, BTN_ACTIVE };
-const float p2pX(float Perc, sf::RenderWindow *Window);
-const float p2pY(float Perc, sf::RenderWindow *Window);
-const unsigned calcCharSize(sf::RenderWindow *Window,
-							const unsigned Modifier = 60);
+float p2pX(float Perc, sf::RenderWindow *Window);
+float p2pY(float Perc, sf::RenderWindow *Window);
+unsigned calcCharSize(sf::RenderWindow *Window, const unsigned Modifier = 60);
 
 class Widget : public sf::Drawable {
   public:

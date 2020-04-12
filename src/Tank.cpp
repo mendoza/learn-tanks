@@ -11,8 +11,8 @@ Tank::Tank(Skeleton::GameDataRef Data, sol::table GC, std::string Path,
 
 Tank::~Tank() {}
 
-const void Tank::rotate(float Angle) {
+void Tank::rotate(float Angle) {
 	this->get<GraphicComponent>().Sprite.rotate(Angle);
 }
 
-const void Tank::move() { this->get<MovableComponent>().Speed = 5; }
+void Tank::move() { this->get<MovableComponent>().Speed = 5; }
