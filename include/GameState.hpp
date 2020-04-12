@@ -2,9 +2,8 @@
 #include <Engine.hpp>
 #include <SFML/Graphics.hpp>
 #include <State.hpp>
-#include <sol.hpp>
 #include <Tank.hpp>
-
+#include <sol.hpp>
 
 class GameState : public Skeleton::State {
 
@@ -18,8 +17,11 @@ class GameState : public Skeleton::State {
   private:
 	Skeleton::GameDataRef Data;
 	sf::Sprite Background;
+	sf::Clock Clock;
+	bool turn;
 	sol::state Script;
 	Tank RedTank;
 	ecs::EntityManager Tanks;
-	ecs::SystemManager Systems;
+	ecs::SystemManager RedTankSystem;
+	ecs::SystemManager BlueTankSystem;
 };
