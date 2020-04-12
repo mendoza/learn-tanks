@@ -10,45 +10,46 @@ class Component {
 	virtual ~Component(){};
 };
 
-class GraphicComponent : public Component {
+class MovableGraphicComponent : public Component {
   public:
 	sf::Sprite Sprite;
-	sf::Vector2f Position;
 	sf::Vector2u ImageCount;
 	sf::Vector2u CurrentImage;
 	std::string Name;
 	sf::IntRect UvRect;
+	float Speed = 0.0f;
+	float SpriteRotation;
 	float SwitchTime;
 	float TotalTime = 0.0f;
 	bool Animated = false;
 	int Row = 0;
 
-	GraphicComponent(Skeleton::GameDataRef Data, sol::table GC) {
+	MovableGraphicComponent(Skeleton::GameDataRef Data, sol::table GC) {
 		this->Name = GC["spriteName"];
 		Data->Assets.loadTexture(this->Name, GC["spriteFilepath"]);
 		sf::Texture &text = Data->Assets.getTexture(this->Name);
 		this->Sprite.setTexture(text);
+		sf::Vector2f Vector(GC["spriteOrientation"]["x"],
+							GC["spriteOrientation"]["y"]);
+		this->SpriteRotation = std::atan2(Vector.y, Vector.x) * 180 / M_PI;
+
+		if (GC["speed"] != sol::nil)
+			this->Speed = GC["speed"];
 
 		if (GC["origin"] != sol::nil) {
-			sf::Vector2f origin(GC["origin"]["x"], GC["origin"]["y"]);
-			this->Sprite.setOrigin(origin);
+			sf::Vector2f Origin(GC["origin"]["x"], GC["origin"]["y"]);
+			this->Sprite.setOrigin(Origin);
 		}
 
 		if (GC["scale"] != sol::nil) {
-			sf::Vector2f scale(GC["scale"]["width"], GC["scale"]["height"]);
-			this->Sprite.setScale(scale);
+			sf::Vector2f Scale(GC["scale"]["width"], GC["scale"]["height"]);
+			this->Sprite.setScale(Scale);
 		}
+
 		if (GC["position"] != sol::nil) {
-			this->Position =
-				sf::Vector2f(GC["position"]["x"], GC["position"]["y"]);
+			sf::Vector2f Position(GC["position"]["x"], GC["position"]["y"]);
 			this->Sprite.setPosition(Position);
 		}
-		// Maybe add it later...
-		// if (GC["rotation"] != sol::nil) {
-		// 	sf::Vector2f vector(GC["rotation"]["x"], GC["rotation"]["y"]);
-		// 	float angle = std::atan(vector.y / vector.x) * 180 / M_PI;
-		// 	this->Sprite.setRotation(angle);
-		// }
 	}
 
 	void update(float dt) override {
@@ -65,7 +66,6 @@ class GraphicComponent : public Component {
 			UvRect.top = CurrentImage.y * UvRect.height;
 			this->Sprite.setTextureRect(this->UvRect);
 		}
-		this->Sprite.setPosition(Position);
 	}
 };
 
@@ -79,16 +79,6 @@ class LogicComponent : public Component {
 		this->ScriptUpdate = L["Tank"]["logicalComponent"]["update"];
 	}
 	void update(float dt) override { this->ScriptUpdate(); }
-
-	void draw() override {}
-};
-
-class MovableComponent : public Component {
-  public:
-	float Speed;
-	MovableComponent(float Speed) { this->Speed = Speed; }
-
-	void update(float dt) override {}
 
 	void draw() override {}
 };

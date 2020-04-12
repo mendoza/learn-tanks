@@ -1,14 +1,14 @@
 #include <Components.hpp>
 
-class Tank : public ecs::EntityAlias<GraphicComponent, LogicComponent,
-									 MovableComponent> {
+class Tank : public ecs::EntityAlias<MovableGraphicComponent, LogicComponent> {
   public:
 	Tank() {}
-	Tank(Skeleton::GameDataRef Data, sol::table GC, std::string Path,
-		 float Speed);
+	Tank(Skeleton::GameDataRef Data, sol::table GC, std::string Path);
 	~Tank();
 	void rotate(float Angle);
-	void move();
+	void forward();
+	void backward();
+	void stop();
 
   private:
 };
