@@ -5,7 +5,9 @@
 #include <SFML/Graphics.hpp>
 #include <State.hpp>
 #include <StateMachine.hpp>
+#include <iostream>
 #include <map>
+#include <math.h>
 #include <memory>
 #include <string>
 
