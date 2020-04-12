@@ -7,7 +7,7 @@
 MenuState::MenuState(Skeleton::GameDataRef data) : Data(data) {}
 
 void MenuState::init() {
-	this->Data->Assets.loadFont("GameFont", "assets/Fonts/ARCADECLASSIC.TTF");
+	this->Data->Assets.loadFont("GameFont", "assets/Fonts/arial.ttf");
 	this->Data->Assets.loadSound("hoverSound", "assets/Sounds/hover.wav");
 	this->Data->Assets.loadSound("clickSound", "assets/Sounds/click.wav");
 
