@@ -9,11 +9,15 @@ Tank = {
         origin = {
             x = 32,
             y = 32
+        },
+        position = {
+            x = 200,
+            y = 200
         }
     },
     logicalComponent = {
         update = function ()
-            rotate(600)
+            move()
         end
     }
 }
