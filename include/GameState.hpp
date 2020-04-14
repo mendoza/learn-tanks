@@ -21,7 +21,8 @@ class GameState : public Skeleton::State {
 	bool turn;
 	sol::state Script;
 	Tank RedTank;
+	Tank BlueTank;
 	ecs::EntityManager Tanks;
-	ecs::SystemManager RedTankSystem;
-	ecs::SystemManager BlueTankSystem;
+	ecs::SystemManager GraphicsSystem;
+	ecs::SystemManager OthersSystem;
 };
