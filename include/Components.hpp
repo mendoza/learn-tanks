@@ -1,7 +1,5 @@
 #pragma once
 #include <Engine.hpp>
-#include <SFML/Graphics.hpp>
-#include <sol.hpp>
 
 class Component {
   public:

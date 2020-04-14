@@ -1,9 +1,6 @@
 #pragma once
 #include <Engine.hpp>
-#include <SFML/Graphics.hpp>
-#include <State.hpp>
 #include <Tank.hpp>
-#include <sol.hpp>
 
 class GameState : public Skeleton::State {
 

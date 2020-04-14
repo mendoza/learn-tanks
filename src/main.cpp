@@ -1,5 +1,4 @@
 #include <Engine.hpp>
-#include <sol.hpp>
 #include <vector>
 
 int main() {

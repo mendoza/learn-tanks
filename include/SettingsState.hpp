@@ -1,9 +1,6 @@
 #pragma once
 #include <Engine.hpp>
 #include <GUI.hpp>
-#include <SFML/Graphics.hpp>
-#include <State.hpp>
-#include <sol.hpp>
 
 class SettingsState : public Skeleton::State {
 

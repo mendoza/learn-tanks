@@ -12,6 +12,7 @@
 #include <map>
 #include <math.h>
 #include <memory>
+#include <sol.hpp>
 #include <string>
 
 namespace Skeleton {
