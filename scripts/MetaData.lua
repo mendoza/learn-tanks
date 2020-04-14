@@ -4,6 +4,7 @@ MetaData = {
     height = 600,
     fpsLimit = 60,
     vSync = true,
+    debugMode = false,
     icon = "assets/icon.png",
     splash = {
         backgroundImageFile = "assets/splash.png",
