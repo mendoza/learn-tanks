@@ -51,7 +51,8 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "typeinfo": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "cinttypes": "cpp"
     },
     "terminal.integrated.shell.windows": "cmd.exe",
 }
