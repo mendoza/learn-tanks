@@ -86,21 +86,9 @@ void MenuState::update(float dt) {
 }
 
 void MenuState::draw() {
-	ImGui::SFML::Update(this->Data->Window, this->Clock.restart());
-
 	this->Data->Window.clear(sf::Color(125, 125, 125));
 	for (auto &it : this->Buttons) {
 		this->Data->Window.draw(*it.second);
 	}
-	if (this->Data->DebugMode) {
-		ImGui::Begin("Hello, world!");
-		if (ImGui::Button("Decir wenas :v")) {
-			std::cout << "Wenas tardes" << std::endl;
-		}
-
-		ImGui::End();
-	}
-	ImGui::EndFrame();
-	ImGui::SFML::Render(this->Data->Window);
 	this->Data->Window.display();
 }

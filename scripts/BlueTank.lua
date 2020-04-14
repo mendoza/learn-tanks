@@ -1,7 +1,7 @@
 Tank = {
     movableGraphicComponent = {
-        spriteName = "RedTank",
-        spriteFilepath = "assets/Sprites/RedTank.png",
+        spriteName = "BlueTank",
+        spriteFilepath = "assets/Sprites/BlueTank.png",
         speed = 5,
         scale = {
             width = 1,
@@ -12,8 +12,8 @@ Tank = {
             y = 32
         },
         position = {
-            x = 200,
-            y = 200
+            x = 400,
+            y = 400
         },
         spriteOrientation = {
             x = 0,

@@ -9,7 +9,6 @@ class GraphicSystem : public ecs::System {
 	void update(float time) override {
 		for (auto entity : entities().with<MovableGraphicComponent>()) {
 			entity.get<MovableGraphicComponent>().update(time);
-
 			this->Data->Window.draw(
 				entity.get<MovableGraphicComponent>().Sprite);
 		}
