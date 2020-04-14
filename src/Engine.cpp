@@ -27,7 +27,7 @@ void Engine::run() {
 			this->Data->Machine.getActiveState()->handleInput();
 			this->Data->Machine.getActiveState()->update(dt);
 		}
-		frametime = this->Clock.restart().asSeconds();
+		frametime = this->Data->Clock.restart().asSeconds();
 		accumulator += frametime;
 		this->Data->Machine.getActiveState()->draw();
 	}

@@ -17,7 +17,7 @@ struct GameData {
 	sf::RenderWindow Window;
 	AssetManager Assets;
 	InputManager Input;
-	sf::Clock _clock;
+	sf::Clock Clock;
 };
 
 typedef std::shared_ptr<GameData> GameDataRef;
@@ -27,7 +27,6 @@ class Engine {
 		   int Limit = 60, bool VSync = false);
 
   private:
-	sf::Clock Clock;
 	const float dt = 1.0f / 6.0f;
 	GameDataRef Data = std::make_shared<GameData>();
 	void run();
