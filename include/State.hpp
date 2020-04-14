@@ -1,4 +1,5 @@
 #pragma once
+#include <SFML/System/Clock.hpp>
 namespace Skeleton {
 class State {
 
@@ -10,5 +11,7 @@ class State {
 
 	virtual void pause() {}
 	virtual void resume() {}
+
+	sf::Clock Clock;
 };
 }; // namespace Skeleton
