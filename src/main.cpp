@@ -1,5 +1,4 @@
 #include <Engine.hpp>
-#include <vector>
 
 int main() {
 	sol::state Script;

@@ -14,6 +14,7 @@
 #include <memory>
 #include <sol.hpp>
 #include <string>
+#include <vector>
 
 namespace Skeleton {
 struct GameData {
